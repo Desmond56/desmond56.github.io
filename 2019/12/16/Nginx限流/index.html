@@ -1,5 +1,358 @@
-<!DOCTYPE HTML><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><meta http-equiv="Cache-Control" content="no-siteapp"><meta http-equiv="Cache-Control" content="no-transform"><meta name="renderer" content="webkit|ie-comp|ie-stand"><meta name="apple-mobile-web-app-capable" content="Alex&#39;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no,email=no,adress=no"><meta name="browsermode" content="application"><meta name="screen-orientation" content="portrait"><meta name="theme-version" content="1.2.3"><meta name="root" content="/"><link rel="dns-prefetch" href="http://openpy.org"><script data-ad-client="ca-pub-6132194783786962" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><meta name="keywords" content="nginx限流,nginx"><meta name="description" content="Nginx限流模块包含
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Alex&#39;s Blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://openpy.org">
+    <script data-ad-client="ca-pub-6132194783786962" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!--SEO-->
+
+<meta name="keywords" content="nginx限流,nginx" />
+
+
+<meta name="description" content="Nginx限流模块包含
 连接数限流模块 ngx_http_limit_conn_module
-漏桶算法实现的请求限流模块 ngx_http_limit_req_modulengx_http_li..."><meta name="robots" content="all"><meta name="google" content="all"><meta name="googlebot" content="all"><meta name="verify" content="all"><title>Nginx限流 | Alex&#39;s Blog</title><link rel="alternate" href="/atom.xml" title="Alex&#39;s Blog" type="application/atom+xml"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/bootstrap.min.css?rev=6892417c465a5fff8ff3277457e9f425"><link rel="stylesheet" href="/css/font-awesome.min.css?rev=214e9f165f17df852ea523439e9d824f"><link rel="stylesheet" href="/css/style.css?rev=b2fe666a4771250c70acdcbd809999c9"><div class="hide"><script type="text/javascript">var cnzz_protocol="https:"==document.location.protocol?" https://":" http://";document.write(unescape("%3Cspan class='cnzz_stat_icon_1278301250 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='"+cnzz_protocol+"s19.cnzz.com/z_stat.php%3Fid%3D1278301250%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"))</script></div><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><meta name="generator" content="Hexo 4.2.0"></head><!--[if lte IE 8]><style>
+漏桶算法实现的请求限流模块 ngx_http_limit_req_modulengx_http_li..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Nginx限流 |
+    
+    Alex&#39;s Blog
+</title>
+
+<link rel="alternate" href="/atom.xml" title="Alex&#39;s Blog" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=6892417c465a5fff8ff3277457e9f425">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=214e9f165f17df852ea523439e9d824f">
+<link rel="stylesheet" href="/css/style.css?rev=b2fe666a4771250c70acdcbd809999c9">
+
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1278301250 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1278301250%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<!--[if lte IE 8]>
+<style>
     html{ font-size: 1em }
-</style><![endif]--><!--[if lte IE 9]><div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div><![endif]--><body><header class="main-header" style="background-image:url(https://cdn.openpy.org/banner.jpg)"><div class="main-header-box"><a class="header-avatar" href="/" title="Alex"><img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block"></a><div class="branding"><h2>人生苦短</h2></div></div></header><nav class="main-navigation"><div class="container"><div class="row"><div class="col-sm-12"><div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav"><span class="sr-only"></span><i class="fa fa-bars"></i></span> <a class="navbar-brand" href="http://openpy.org">Alex&#39;s Blog</a></div><div class="collapse navbar-collapse" id="main-menu"><ul class="menu"><li role="presentation" class="text-center"><a href="/"><i class="fa"></i> 首页</a></li><li role="presentation" class="text-center"><a href="/categories/区块链/"><i class="fa"></i> 区块链</a></li><li role="presentation" class="text-center"><a href="/categories/Linux/"><i class="fa"></i> Linux</a></li><li role="presentation" class="text-center"><a href="/categories/前端/"><i class="fa"></i> 前端</a></li><li role="presentation" class="text-center"><a href="/categories/后端/"><i class="fa"></i> 后端</a></li><li role="presentation" class="text-center"><a href="/categories/算法/"><i class="fa"></i> 算法</a></li><li role="presentation" class="text-center"><a href="/categories/数据结构/"><i class="fa"></i> 数据结构</a></li><li role="presentation" class="text-center"><a href="/categories/docker/"><i class="fa"></i> docker</a></li><li role="presentation" class="text-center"><a href="/archives/"><i class="fa"></i> 时间轴</a></li></ul></div></div></div></div></nav><section class="content-wrap"><div class="container"><div class="row"><main class="col-md-8 main-content m-post"><p id="process"></p><article class="post"><div class="post-head"><h1 id="Nginx限流">Nginx限流</h1><div class="post-meta"><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <a class="category-link" href="/categories/Linux/">Linux</a> <a class="category-link" href="/categories/Linux/nginx/">nginx</a></span><span class="fa-wrap"><i class="fa fa-tags"></i> <span class="tags-meta"><a class="tag-link" href="/tags/nginx/" rel="tag">nginx</a> <a class="tag-link" href="/tags/nginx%E9%99%90%E6%B5%81/" rel="tag">nginx限流</a></span></span><span class="fa-wrap"><i class="fa fa-clock-o"></i> <span class="date-meta">2019/12/16</span></span></div></div><div class="post-body post-content"><h3 id="Nginx限流模块包含"><a href="#Nginx限流模块包含" class="headerlink" title="Nginx限流模块包含"></a>Nginx限流模块包含</h3><ul><li>连接数限流模块 <strong>ngx_http_limit_conn_module</strong></li><li>漏桶算法实现的请求限流模块 <strong>ngx_http_limit_req_module</strong><h3 id="ngx-http-limit-conn-module"><a href="#ngx-http-limit-conn-module" class="headerlink" title="ngx_http_limit_conn_module"></a><strong>ngx_http_limit_conn_module</strong></h3>我们经常会遇到这种情况，服务器流量异常，负载过大等等。对于大流量恶意的攻击访问，会带来带宽的浪费，服务器压力，影响业务，往往考虑对同一个ip的连接数，并发数进行限制。<br>ngx_http_limit_conn_module 模块来实现该需求。该模块可以根据定义的键来限制每个键值的连接数，如同一个IP来源的连接数。并不是所有的连接都会被该模块计数，只有那些正在被处理的请求（这些请求的头信息已被完全读入）所在的连接才会被计数。<br>我们可以在nginx_conf的http{}中加上如下配置实现限制：<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 限制每个用户的并发连接数，取名one</span></span><br><span class="line"><span class="attribute">limit_conn_zone</span> <span class="variable">$binary_remote_addr</span> zone=one:<span class="number">10m</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置记录被限流后的日志级别，默认error级别</span></span><br><span class="line"><span class="attribute">limit_conn_log_level</span> <span class="literal">error</span>;</span><br><span class="line"><span class="comment"># 配置被限流后返回的状态码，默认返回503</span></span><br><span class="line"><span class="attribute">limit_conn_status</span> <span class="number">503</span>;</span><br></pre></td></tr></table></figure>然后在server{}里加上如下代码：<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#限制用户并发连接数为1</span></span><br><span class="line"><span class="attribute">limit_conn</span> one <span class="number">1</span>;</span><br></pre></td></tr></table></figure>另外刚才是配置针对单个IP的并发限制，还是可以针对域名进行并发限制，配置和客户端IP类似。<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#http&#123;&#125;段配置</span></span><br><span class="line"><span class="attribute">limit_conn_zone</span> $ server_name zone=perserver:<span class="number">10m</span>;</span><br><span class="line"><span class="comment">#server&#123;&#125;段配置</span></span><br><span class="line"><span class="attribute">limit_conn</span> perserver <span class="number">1</span>;</span><br></pre></td></tr></table></figure><h3 id="ngx-http-limit-req-module"><a href="#ngx-http-limit-req-module" class="headerlink" title="ngx_http_limit_req_module"></a><strong>ngx_http_limit_req_module</strong></h3>上面我们使用到了ngx_http_limit_conn_module 模块，来限制连接数。那么请求数的限制该怎么做呢？这就需要通过ngx_http_limit_req_module 模块来实现，该模块可以通过定义的键值来限制请求处理的频率。<br>特别的，可以限制来自单个IP地址的请求处理频率。限制的方法是使用了漏斗算法，每秒固定处理请求数，推迟过多请求。如果请求的频率超过了限制域配置的值，请求处理会被延迟或被丢弃，所以所有的请求都是以定义的频率被处理的。<br>在http{}中配置<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#区域名称为one，大小为10m，平均处理的请求频率不能超过每秒一次。</span></span><br><span class="line"><span class="attribute">limit_req_zone</span> <span class="variable">$binary_remote_addr</span> zone=one:<span class="number">10m</span> rate=1r/s;</span><br></pre></td></tr></table></figure>在server{}中配置<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置每个IP桶的数量为5</span></span><br><span class="line"><span class="attribute">limit_req</span> zone=one burst=<span class="number">5</span>;</span><br></pre></td></tr></table></figure>上面设置定义了每个IP的请求处理只能限制在每秒1个。并且服务端可以为每个IP缓存5个请求，如果操作了5个请求，请求就会被丢弃。<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><a href="https://colobu.com/2015/10/26/nginx-limit-modules/" target="_blank" rel="noopener">https://colobu.com/2015/10/26/nginx-limit-modules/</a><br><a href="[https://mp.weixin.qq.com/s?__biz=MzU0MzQ5MDA0Mw==&mid=2247488251&idx=1&sn=0ea27c9b8d3a0b1656137162ccf39d80&chksm=fb0bf86fcc7c71790c67a58efb1f8114abaeb099bf1e453a33b5d1905c8ee6e7b27eb57fd61a&mpshare=1&scene=1&srcid=&sharer_sharetime=1576477648655&sharer_shareid=714f27d4f289ce96efe7800acadcd2d8#rd](https://mp.weixin.qq.com/s?__biz=MzU0MzQ5MDA0Mw==&mid=2247488251&idx=1&sn=0ea27c9b8d3a0b1656137162ccf39d80&chksm=fb0bf86fcc7c71790c67a58efb1f8114abaeb099bf1e453a33b5d1905c8ee6e7b27eb57fd61a&mpshare=1&scene=1&srcid=&sharer_sharetime=1576477648655&sharer_shareid=714f27d4f289ce96efe7800acadcd2d8#rd)">朱小厮的博客</a></li></ul></div><div class="reward" ontouchstart><div class="reward-wrap">赏<div class="reward-box"><span class="reward-type"><img class="alipay" src="https://cdn.openpy.org/alipay.jpg"><b>支付宝打赏</b></span> <span class="reward-type"><img class="wechat" src="https://cdn.openpy.org/wepay.jpg"><b>微信打赏</b></span></div></div><p class="reward-tip">赞赏是不耍流氓的鼓励</p></div><div class="post-footer"><div>转载声明： 商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href="/2019/12/17/Gnome%E5%AE%89%E8%A3%85%E6%90%9C%E7%8B%97%E5%90%8E%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/" class="pre-post btn btn-default" title="Gnome安装搜狗后无法输入中文"><i class="fa fa-angle-left fa-fw"></i> <span class="hidden-lg">上一篇</span> <span class="hidden-xs">Gnome安装搜狗后无法输入中文</span></a></div><div id="comments"><div id="vcomments" class="valine"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="/assets/valine.min.js"></script><script>new Valine({av:AV,el:"#vcomments",appId:"cSG8MGyJl2va2itbqagX3T4W-gzGzoHsz",appKey:"MSMLOt9WQqU8OQPD4XJPEmlq",placeholder:"说点什么吧",notify:!1,verify:!0,avatar:"mm",meta:"nick,mail".split(","),pageSize:"10",path:window.location.pathname,lang:"zh-CN".toLowerCase()})</script></div></main><aside id="article-toc" role="navigation" class="col-md-4"><div class="widget"><h3 class="title">文章目录</h3><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nginx限流模块包含"><span class="toc-text">Nginx限流模块包含</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ngx-http-limit-conn-module"><span class="toc-text">ngx_http_limit_conn_module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ngx-http-limit-req-module"><span class="toc-text">ngx_http_limit_req_module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文档"><span class="toc-text">参考文档</span></a></li></ol></div></aside></div></div></section><footer class="main-footer"><div class="container"><div class="row"></div></div></footer><a id="back-to-top" class="icon-btn hide"><i class="fa fa-chevron-up"></i></a><div class="copyright"><div class="container"><div class="row"><div class="col-sm-12"><div class="busuanzi"></div></div><div class="col-sm-12"><span>Copyright &copy; 2017</span> | <span>Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a></span> | <span>Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a></span></div></div></div></div><script src="/js/app.js?rev=e66bcd843db8808cbec1cc2ec0575f8f"></script></body></html>
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://cdn.openpy.org/banner.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='Alex'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                人生苦短
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://openpy.org">
+                        Alex&#39;s Blog</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/区块链/"><i class="fa "></i>
+                                区块链</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/Linux/"><i class="fa "></i>
+                                Linux</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/前端/"><i class="fa "></i>
+                                前端</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/后端/"><i class="fa "></i>
+                                后端</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/算法/"><i class="fa "></i>
+                                算法</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/数据结构/"><i class="fa "></i>
+                                数据结构</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/docker/"><i class="fa "></i>
+                                docker</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Nginx限流">
+            
+            Nginx限流
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/Linux/">Linux</a> <a class="category-link" href="/categories/Linux/nginx/">nginx</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/nginx/" rel="tag">nginx</a> <a class="tag-link" href="/tags/nginx%E9%99%90%E6%B5%81/" rel="tag">nginx限流</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2019/12/16</span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="Nginx限流模块包含"><a href="#Nginx限流模块包含" class="headerlink" title="Nginx限流模块包含"></a>Nginx限流模块包含</h3><ul>
+<li>连接数限流模块 <strong>ngx_http_limit_conn_module</strong></li>
+<li>漏桶算法实现的请求限流模块 <strong>ngx_http_limit_req_module</strong><h3 id="ngx-http-limit-conn-module"><a href="#ngx-http-limit-conn-module" class="headerlink" title="ngx_http_limit_conn_module"></a><strong>ngx_http_limit_conn_module</strong></h3>我们经常会遇到这种情况，服务器流量异常，负载过大等等。对于大流量恶意的攻击访问，会带来带宽的浪费，服务器压力，影响业务，往往考虑对同一个ip的连接数，并发数进行限制。<br>ngx_http_limit_conn_module 模块来实现该需求。该模块可以根据定义的键来限制每个键值的连接数，如同一个IP来源的连接数。并不是所有的连接都会被该模块计数，只有那些正在被处理的请求（这些请求的头信息已被完全读入）所在的连接才会被计数。<br>我们可以在nginx_conf的http{}中加上如下配置实现限制：<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 限制每个用户的并发连接数，取名one</span></span><br><span class="line"><span class="attribute">limit_conn_zone</span> <span class="variable">$binary_remote_addr</span> zone=one:<span class="number">10m</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置记录被限流后的日志级别，默认error级别</span></span><br><span class="line"><span class="attribute">limit_conn_log_level</span> <span class="literal">error</span>;</span><br><span class="line"><span class="comment"># 配置被限流后返回的状态码，默认返回503</span></span><br><span class="line"><span class="attribute">limit_conn_status</span> <span class="number">503</span>;</span><br></pre></td></tr></table></figure>
+然后在server{}里加上如下代码：<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#限制用户并发连接数为1</span></span><br><span class="line"><span class="attribute">limit_conn</span> one <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+另外刚才是配置针对单个IP的并发限制，还是可以针对域名进行并发限制，配置和客户端IP类似。<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#http&#123;&#125;段配置</span></span><br><span class="line"><span class="attribute">limit_conn_zone</span> $ server_name zone=perserver:<span class="number">10m</span>;</span><br><span class="line"><span class="comment">#server&#123;&#125;段配置</span></span><br><span class="line"><span class="attribute">limit_conn</span> perserver <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="ngx-http-limit-req-module"><a href="#ngx-http-limit-req-module" class="headerlink" title="ngx_http_limit_req_module"></a><strong>ngx_http_limit_req_module</strong></h3>上面我们使用到了ngx_http_limit_conn_module 模块，来限制连接数。那么请求数的限制该怎么做呢？这就需要通过ngx_http_limit_req_module 模块来实现，该模块可以通过定义的键值来限制请求处理的频率。<br>特别的，可以限制来自单个IP地址的请求处理频率。限制的方法是使用了漏斗算法，每秒固定处理请求数，推迟过多请求。如果请求的频率超过了限制域配置的值，请求处理会被延迟或被丢弃，所以所有的请求都是以定义的频率被处理的。<br>在http{}中配置<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#区域名称为one，大小为10m，平均处理的请求频率不能超过每秒一次。</span></span><br><span class="line"><span class="attribute">limit_req_zone</span> <span class="variable">$binary_remote_addr</span> zone=one:<span class="number">10m</span> rate=1r/s;</span><br></pre></td></tr></table></figure>
+在server{}中配置<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置每个IP桶的数量为5</span></span><br><span class="line"><span class="attribute">limit_req</span> zone=one burst=<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+上面设置定义了每个IP的请求处理只能限制在每秒1个。并且服务端可以为每个IP缓存5个请求，如果操作了5个请求，请求就会被丢弃。<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><a href="https://colobu.com/2015/10/26/nginx-limit-modules/" target="_blank" rel="noopener">https://colobu.com/2015/10/26/nginx-limit-modules/</a><br><a href="[https://mp.weixin.qq.com/s?__biz=MzU0MzQ5MDA0Mw==&mid=2247488251&idx=1&sn=0ea27c9b8d3a0b1656137162ccf39d80&chksm=fb0bf86fcc7c71790c67a58efb1f8114abaeb099bf1e453a33b5d1905c8ee6e7b27eb57fd61a&mpshare=1&scene=1&srcid=&sharer_sharetime=1576477648655&sharer_shareid=714f27d4f289ce96efe7800acadcd2d8#rd](https://mp.weixin.qq.com/s?__biz=MzU0MzQ5MDA0Mw==&mid=2247488251&idx=1&sn=0ea27c9b8d3a0b1656137162ccf39d80&chksm=fb0bf86fcc7c71790c67a58efb1f8114abaeb099bf1e453a33b5d1905c8ee6e7b27eb57fd61a&mpshare=1&scene=1&srcid=&sharer_sharetime=1576477648655&sharer_shareid=714f27d4f289ce96efe7800acadcd2d8#rd)">朱小厮的博客</a></li>
+</ul>
+
+    </div>
+    
+    <div class="reward" ontouchstart>
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+            <span class="reward-type">
+                <img class="alipay" src="https://cdn.openpy.org/alipay.jpg"><b>支付宝打赏</b>
+            </span>
+            
+            
+            <span class="reward-type">
+                <img class="wechat" src="https://cdn.openpy.org/wepay.jpg"><b>微信打赏</b>
+            </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">
+        赞赏是不耍流氓的鼓励
+    </p>
+</div>
+    
+    <div class="post-footer">
+        <div>
+            
+            转载声明：
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2019/12/17/Gnome%E5%AE%89%E8%A3%85%E6%90%9C%E7%8B%97%E5%90%8E%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/" class="pre-post btn btn-default" title='Gnome安装搜狗后无法输入中文'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            Gnome安装搜狗后无法输入中文</span>
+    </a>
+    
+    
+</div>
+
+<div id="comments">
+    
+
+<div id="vcomments" class="valine"></div>
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+<script>
+new Valine({
+    av: AV,
+    el: '#vcomments',
+    appId: 'cSG8MGyJl2va2itbqagX3T4W-gzGzoHsz',
+    appKey: 'MSMLOt9WQqU8OQPD4XJPEmlq',
+    placeholder: '说点什么吧',
+    notify: false,
+    verify: true,
+    avatar: 'mm',
+    meta: 'nick,mail'.split(','),
+    pageSize: '10',
+    path: window.location.pathname,
+    lang: 'zh-CN'.toLowerCase()
+})
+</script>
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nginx限流模块包含"><span class="toc-text">Nginx限流模块包含</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ngx-http-limit-conn-module"><span class="toc-text">ngx_http_limit_conn_module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ngx-http-limit-req-module"><span class="toc-text">ngx_http_limit_req_module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文档"><span class="toc-text">参考文档</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/app.js?rev=e66bcd843db8808cbec1cc2ec0575f8f"></script>
+
+</body>
+</html>
