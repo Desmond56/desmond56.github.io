@@ -63,6 +63,20 @@
 
     
 
+<script>
+(function() {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 <meta name="generator" content="Hexo 4.2.0"></head>
 <!--[if lte IE 8]>
 <style>
@@ -241,6 +255,12 @@
     </div>
 </article>
 <div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2019/12/23/%E5%A6%82%E4%BD%95%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/" class="pre-post btn btn-default" title='如何免费搭建网站'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            如何免费搭建网站</span>
+    </a>
     
     
     <a href="/2019/12/19/go-micro-%E5%A2%9E%E5%8A%A0%E6%8F%92%E4%BB%B6-etcd%E7%AD%89%E6%8F%92%E4%BB%B6/" class="next-post btn btn-default" title='go-micro 增加插件(etcd等插件)'>
