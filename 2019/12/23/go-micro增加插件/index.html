@@ -23,7 +23,8 @@
 <meta name="keywords" content="go-micro" />
 
 
-<meta name="description" content="" />
+<meta name="description" content="增加etcdv3在$GOPATH/src/github.com/micro/micro下新建plugins.go
+12345package mainimport (    _ "github.c..." />
 
 
 <meta name="robots" content="all" />
@@ -93,7 +94,7 @@
      >
     <div class="main-header-box">
         <a class="header-avatar" href="/" title='Alex'>
-            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+            <img src="https://cdn.openpy.org/avatar.jpg" alt="logo头像" class="img-responsive center-block">
         </a>
         <div class="branding">
             <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
@@ -160,6 +161,11 @@
                         </li>
                         
                         <li role="presentation" class="text-center">
+                            <a href="/categories/杂谈/"><i class="fa "></i>
+                                杂谈</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
                             <a href="/archives/"><i class="fa "></i>
                                 时间轴</a>
                         </li>
@@ -214,7 +220,9 @@
     </div>
     
     <div class="post-body post-content">
-        
+        <p>增加etcdv3<br>在$GOPATH/src/github.com/micro/micro下新建plugins.go</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    _ <span class="string">"github.com/micro/go-plugins/registry/etcdv3"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> go build -i -o micro ./main.go ./plugins.go</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mv micro <span class="variable">$GOBIN</span>/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> micro --registry=etcdv3 list services</span></span><br><span class="line">lp.srv.eg1</span><br><span class="line">lp.srv.eg2 </span><br><span class="line"><span class="meta">#</span><span class="bash">　报错trace包重复, 将报错路径下的trace包删除</span></span><br></pre></td></tr></table></figure>
     </div>
     
     <div class="reward" ontouchstart>
@@ -241,7 +249,7 @@
         <div>
             
             转载声明：
-            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Alex</a>
             
             
         </div>
@@ -281,7 +289,7 @@ new Valine({
     el: '#vcomments',
     appId: 'cSG8MGyJl2va2itbqagX3T4W-gzGzoHsz',
     appKey: 'MSMLOt9WQqU8OQPD4XJPEmlq',
-    placeholder: '说点什么吧',
+    placeholder: '如有任何疑问,请评论,本插件无需登录,如想得到回复,请在上方填写邮箱',
     notify: false,
     verify: true,
     avatar: 'mm',
@@ -330,7 +338,9 @@ new Valine({
             </div>
             <div class="col-sm-12">
                 <span>Copyright &copy;
-                    2017
+                    2019
+                    <a href="//beian.miit.gov.cn/" target="_blank" rel="nofollow">
+                        京ICP备16013354号</a>
                     
                 </span> |
                 <span>
