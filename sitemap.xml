@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://openpy.org/posts/973a9f39.html</loc>
+    
+    <lastmod>2020-01-09T08:34:39.141Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://openpy.org/posts/d7d50464.html</loc>
+    
+    <lastmod>2020-01-09T07:06:43.574Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://openpy.org/posts/undefined.html</loc>
+    
+    <lastmod>2020-01-08T08:05:50.715Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://openpy.org/posts/c8db2ce0.html</loc>
     
     <lastmod>2020-01-07T01:57:47.846Z</lastmod>
@@ -44,20 +65,6 @@
   </url>
   
   <url>
-    <loc>https://openpy.org/posts/3f415fcc.html</loc>
-    
-    <lastmod>2020-01-07T01:57:47.846Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://openpy.org/posts/973a9f39.html</loc>
-    
-    <lastmod>2020-01-07T01:57:47.846Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://openpy.org/posts/8596c31f.html</loc>
     
     <lastmod>2020-01-07T01:57:47.846Z</lastmod>
@@ -72,14 +79,14 @@
   </url>
   
   <url>
-    <loc>https://openpy.org/about/index.html</loc>
+    <loc>https://openpy.org/books/index.html</loc>
     
     <lastmod>2020-01-07T01:57:47.846Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://openpy.org/books/index.html</loc>
+    <loc>https://openpy.org/about/index.html</loc>
     
     <lastmod>2020-01-07T01:57:47.846Z</lastmod>
     
@@ -93,7 +100,7 @@
   </url>
   
   <url>
-    <loc>https://openpy.org/links/index.html</loc>
+    <loc>https://openpy.org/tags/index.html</loc>
     
     <lastmod>2020-01-07T01:57:47.846Z</lastmod>
     
@@ -107,16 +114,9 @@
   </url>
   
   <url>
-    <loc>https://openpy.org/tags/index.html</loc>
+    <loc>https://openpy.org/links/index.html</loc>
     
     <lastmod>2020-01-07T01:57:47.846Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://openpy.org/posts/undefined.html</loc>
-    
-    <lastmod>2019-12-17T12:07:15.070Z</lastmod>
     
   </url>
   
