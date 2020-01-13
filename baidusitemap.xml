@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://openpy.org/posts/undefined.html</loc>
-    <lastmod>2020-01-13</lastmod>
-  </url>  <url>
-    <loc>https://openpy.org/posts/c8db2ce0.html</loc>
-    <lastmod>2020-01-13</lastmod>
-  </url>  <url>
-    <loc>https://openpy.org/posts/ee4c5fa7.html</loc>
-    <lastmod>2020-01-13</lastmod>
-  </url>  <url>
-    <loc>https://openpy.org/posts/1121b615.html</loc>
-    <lastmod>2020-01-13</lastmod>
-  </url>  <url>
-    <loc>https://openpy.org/posts/7537ba3d.html</loc>
-    <lastmod>2020-01-13</lastmod>
-  </url>  <url>
     <loc>https://openpy.org/posts/8f4538c0.html</loc>
     <lastmod>2020-01-13</lastmod>
   </url>  <url>
@@ -29,6 +14,21 @@
     <lastmod>2020-01-13</lastmod>
   </url>  <url>
     <loc>https://openpy.org/posts/8596c31f.html</loc>
+    <lastmod>2020-01-13</lastmod>
+  </url>  <url>
+    <loc>https://openpy.org/posts/undefined.html</loc>
+    <lastmod>2020-01-13</lastmod>
+  </url>  <url>
+    <loc>https://openpy.org/posts/c8db2ce0.html</loc>
+    <lastmod>2020-01-13</lastmod>
+  </url>  <url>
+    <loc>https://openpy.org/posts/ee4c5fa7.html</loc>
+    <lastmod>2020-01-13</lastmod>
+  </url>  <url>
+    <loc>https://openpy.org/posts/1121b615.html</loc>
+    <lastmod>2020-01-13</lastmod>
+  </url>  <url>
+    <loc>https://openpy.org/posts/7537ba3d.html</loc>
     <lastmod>2020-01-13</lastmod>
   </url>
 </urlset>
