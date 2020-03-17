@@ -42,18 +42,14 @@
       
       <categories>
           
-          <category> tag1 </category>
-          
-          <category> tag2 </category>
+          <category> 数据结构 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> tag1 </tag>
-            
-            <tag> tag2 </tag>
+            <tag> 数据结构 </tag>
             
         </tags>
       
