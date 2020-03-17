@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Alex&#39;s Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://openpy.org/"/>
+  <updated>2020-03-17T10:35:06.211Z</updated>
+  <id>https://openpy.org/</id>
+  
+  <author>
+    <name>Alex</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>以太坊为什么要把evm换成ewasm</title>
+    <link href="https://openpy.org/posts/634bfd05.html"/>
+    <id>https://openpy.org/posts/634bfd05.html</id>
+    <published>2020-03-17T08:35:32.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="tag1" scheme="https://openpy.org/categories/tag1/"/>
+    
+      <category term="tag2" scheme="https://openpy.org/categories/tag1/tag2/"/>
+    
+    
+      <category term="tag1" scheme="https://openpy.org/tags/tag1/"/>
+    
+      <category term="tag2" scheme="https://openpy.org/tags/tag2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux上v2ray/ss做全局代理</title>
+    <link href="https://openpy.org/posts/d5182360.html"/>
+    <id>https://openpy.org/posts/d5182360.html</id>
+    <published>2020-03-13T06:32:03.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文转发自<a href="http://wonderkun.cc/2016/05/16/%E5%9C%A8linux%E4%B8%8A%E6%8A%8Ashadowsocks%E5%81%9A%E6%88%90%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86/" target="_blank" rel="noopener">wonderkun’s Blog</a></p><ol><li><p>默认系统已安装v2ray, shadowsocks等代理软件, 并且通过socks5监听了本机1080端口</p></li><li><p>安装redsocks</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install redsocks</span><br><span class="line"></span><br><span class="line"><span class="comment">### redsocks常用命令</span></span><br><span class="line">sudo service redsocks start     <span class="comment">#打开redsocks</span></span><br><span class="line">sudo service redsocks stop      <span class="comment">#停止redsocks</span></span><br><span class="line">sudo service redsocks restart   <span class="comment">#重启redsocks</span></span><br><span class="line"></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> redsocks  <span class="comment">#开机启动redsocks</span></span><br><span class="line">sudo systemctl <span class="built_in">disable</span> redsocks  <span class="comment">#停止开机启动redsocks</span></span><br></pre></td></tr></table></figure><a id="more"></a></li><li><p>配置redsocks<br>编辑redsocks配置文件<em>/etc/redsocks.conf</em> 找到redsocks</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">redsocks &#123;</span><br><span class="line">    /* `local_ip<span class="string">' defaults to 127.0.0.1 for security reasons,</span></span><br><span class="line"><span class="string">     * use 0.0.0.0 if you want to listen on every interface.</span></span><br><span class="line"><span class="string">     * `local_*'</span> are used as port to redirect to.</span><br><span class="line">     */</span><br><span class="line">    local_ip = 127.0.0.1;</span><br><span class="line">    local_port = 12345; //这个端口默认就行,只要跟你以后iptables,重定向的端口一样就ok</span><br><span class="line">    </span><br><span class="line">    // `ip<span class="string">' and `port'</span> are IP and tcp-port of proxy-server</span><br><span class="line">    // You can also use hostname instead of IP, only one (random)</span><br><span class="line">    // address of multihomed host will be used.</span><br><span class="line">    ip = 127.0.0.1; //本地shadowsocks客户端,地址就是127.0.0.1</span><br><span class="line">    port = 1080;    //shadowsocks  客户端的端口,默认就是1080</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    // known types: socks4, socks5, http-connect, http-relay</span><br><span class="line">    <span class="built_in">type</span> = socks5; //使用的代理类型</span><br><span class="line">    </span><br><span class="line">    // login = <span class="string">"foobar"</span>;</span><br><span class="line">    // password = <span class="string">"baz"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>修改好配置文件后, 重启redsocks</p></li><li><p>配置iptables, 将以下脚本保存为iptables.sh</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> -lt 1 ]</span><br><span class="line"></span><br><span class="line"><span class="comment">#不重定向目的地址为服务器的包</span></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> -en <span class="string">"\n"</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Iptables redirect script to support global proxy on ss for linux ... "</span></span><br><span class="line">    <span class="built_in">echo</span> -en <span class="string">"\n"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Usage : <span class="variable">$&#123;0&#125;</span> action [options]"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Example:"</span></span><br><span class="line">    <span class="built_in">echo</span> -en <span class="string">"\n"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;0&#125;</span> start server_ip To start global proxy"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;0&#125;</span> stop To stop global proxy"</span></span><br><span class="line">    <span class="built_in">echo</span> -en <span class="string">"\n"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$&#123;1&#125;</span> == <span class="string">'stop'</span> ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"stoping the Iptables redirect script ..."</span></span><br><span class="line">        sudo iptables -t nat -F</span><br><span class="line">   <span class="keyword">fi</span></span><br><span class="line">   <span class="keyword">if</span>     [ <span class="variable">$&#123;1&#125;</span> == <span class="string">'start'</span> ]</span><br><span class="line">   <span class="keyword">then</span></span><br><span class="line">       <span class="keyword">if</span>    [ <span class="variable">$#</span> -lt 2 ]</span><br><span class="line">       <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> -e <span class="string">"\033[49;31mPlease input the server_ip ...\033[0m"</span></span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">           <span class="comment">##不重定向目的地址为服务器的包  </span></span><br><span class="line">           sudo iptables -t nat -A OUTPUT -d <span class="variable">$&#123;2&#125;</span> -j RETURN <span class="comment">#请用你的shadowsocks服务器的地址替换$SERVER_IP</span></span><br><span class="line">           <span class="comment"># #不重定向私有地址的流量</span></span><br><span class="line">           sudo iptables -t nat -A OUTPUT -d 10.0.0.0/8 -j RETURN</span><br><span class="line">           sudo iptables -t nat -A OUTPUT -d 172.16.0.0/12 -j RETURN</span><br><span class="line">           sudo iptables -t nat -A OUTPUT -d 192.168.0.0/16 -j RETURN</span><br><span class="line"></span><br><span class="line">           <span class="comment">#不重定向保留地址的流量,这一步很重要</span></span><br><span class="line">           sudo iptables -t nat -A OUTPUT -d 127.0.0.0/8 -j RETURN</span><br><span class="line"></span><br><span class="line">            <span class="comment"># #重定向所有不满足以上条件的流量到redsocks监听的12345端口</span></span><br><span class="line">           sudo iptables -t nat -A OUTPUT -p tcp -j REDIRECT --to-ports 12345 <span class="comment">#12345是你的redsocks运行的端口,请根据你的情况替换它</span></span><br><span class="line">     <span class="keyword">fi</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure></li><li><p>将上面代码保存好后, 运行脚本启动就可以设置全局代理了, 启动和停止脚本如下:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./iptables.sh   start  ip     <span class="comment">#ip是你的shadowsocks服务器的ip,开启全局代理 </span></span><br><span class="line">./iiptables.sh  stop   <span class="comment">#结束全局代理,这句是不用全局代理之后,必须运行的,否则是没有办法上网的</span></span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文转发自&lt;a href=&quot;http://wonderkun.cc/2016/05/16/%E5%9C%A8linux%E4%B8%8A%E6%8A%8Ashadowsocks%E5%81%9A%E6%88%90%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;wonderkun’s Blog&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;默认系统已安装v2ray, shadowsocks等代理软件, 并且通过socks5监听了本机1080端口&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装redsocks&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo apt install redsocks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;### redsocks常用命令&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo service redsocks start     &lt;span class=&quot;comment&quot;&gt;#打开redsocks&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo service redsocks stop      &lt;span class=&quot;comment&quot;&gt;#停止redsocks&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo service redsocks restart   &lt;span class=&quot;comment&quot;&gt;#重启redsocks&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo systemctl &lt;span class=&quot;built_in&quot;&gt;enable&lt;/span&gt; redsocks  &lt;span class=&quot;comment&quot;&gt;#开机启动redsocks&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo systemctl &lt;span class=&quot;built_in&quot;&gt;disable&lt;/span&gt; redsocks  &lt;span class=&quot;comment&quot;&gt;#停止开机启动redsocks&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://openpy.org/categories/Linux/"/>
+    
+    
+      <category term="v2ray" scheme="https://openpy.org/tags/v2ray/"/>
+    
+      <category term="shadowsocks" scheme="https://openpy.org/tags/shadowsocks/"/>
+    
+      <category term="全局代理" scheme="https://openpy.org/tags/%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构是什么,常用的数据结构有哪些</title>
+    <link href="https://openpy.org/posts/85d37932.html"/>
+    <id>https://openpy.org/posts/85d37932.html</id>
+    <published>2020-03-11T07:48:13.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="数据结构" scheme="https://openpy.org/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="https://openpy.org/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sudoers语法错误</title>
+    <link href="https://openpy.org/posts/275f2d5d.html"/>
+    <id>https://openpy.org/posts/275f2d5d.html</id>
+    <published>2020-03-09T06:53:14.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="误修改sudoers文件导致执行sudo时提示语法错误解决方案"><a href="#误修改sudoers文件导致执行sudo时提示语法错误解决方案" class="headerlink" title="误修改sudoers文件导致执行sudo时提示语法错误解决方案"></a>误修改sudoers文件导致执行sudo时提示语法错误解决方案</h1><h4 id="1-直接切换到root用户修改-已知root密码"><a href="#1-直接切换到root用户修改-已知root密码" class="headerlink" title="1. 直接切换到root用户修改(已知root密码)"></a>1. 直接切换到root用户修改(已知root密码)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到root用户</span></span><br><span class="line">su</span><br><span class="line"><span class="comment"># 修改/etc/sudoers</span></span><br><span class="line">vi /etc/sudoers</span><br><span class="line">...</span><br></pre></td></tr></table></figure><h4 id="2-如果不知道root密码-可重启进入恢复模式修改-具体流程参照网络"><a href="#2-如果不知道root密码-可重启进入恢复模式修改-具体流程参照网络" class="headerlink" title="2. 如果不知道root密码, 可重启进入恢复模式修改, 具体流程参照网络"></a>2. 如果不知道root密码, 可重启进入恢复模式修改, 具体流程参照网络</h4><a id="more"></a><h4 id="3-通过pkexec命令修改"><a href="#3-通过pkexec命令修改" class="headerlink" title="3. 通过pkexec命令修改"></a>3. 通过pkexec命令修改</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果为个人桌面Ubuntu系统, 可打开终端输入</span></span><br><span class="line">pkexec visudo</span><br><span class="line"><span class="comment"># 这时候桌面会弹出输入密码的窗口要求输入密码</span></span><br><span class="line"><span class="comment"># 输入密码后就会进入一个nano的编辑窗口, 修改错误,保存, 问题解决</span></span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果是Ubuntu server, 没有桌面环境, 应执行以下流程</span></span><br><span class="line"><span class="comment"># 打开两个终端, 分别连接该服务器</span></span><br><span class="line"><span class="comment"># 在终端1执行 </span></span><br><span class="line"><span class="built_in">echo</span> $$</span><br><span class="line"><span class="comment"># 会得到一个pid,接下来在终端2中执行</span></span><br><span class="line">pkttyagent --process 1313</span><br><span class="line"><span class="comment"># 此时终端2会监听终端1 pkexec命令</span></span><br><span class="line"><span class="comment"># 在终端1执行以下命令</span></span><br><span class="line">pkexec visudo</span><br><span class="line"><span class="comment"># 在终端2中输入用户密码</span></span><br><span class="line"><span class="comment"># 此时终端1就进入了nano编辑模式, 修改错误, 保存. 问题解决</span></span><br></pre></td></tr></table></figure><p>终端1</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> $$</span><br><span class="line">1313</span><br><span class="line"></span><br><span class="line">pkexec visudo</span><br></pre></td></tr></table></figure><p>终端2</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pkttyagent --process 1313</span><br><span class="line">==== AUTHENTICATING FOR org.freedesktop.policykit.exec ===</span><br><span class="line">要以超级用户的身份运行“/usr/sbin/visudo” 程序，您必须通过验证</span><br><span class="line">Authenticating as: avicii,,, (alex)</span><br><span class="line">Password:</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;误修改sudoers文件导致执行sudo时提示语法错误解决方案&quot;&gt;&lt;a href=&quot;#误修改sudoers文件导致执行sudo时提示语法错误解决方案&quot; class=&quot;headerlink&quot; title=&quot;误修改sudoers文件导致执行sudo时提示语法错误解决方案&quot;&gt;&lt;/a&gt;误修改sudoers文件导致执行sudo时提示语法错误解决方案&lt;/h1&gt;&lt;h4 id=&quot;1-直接切换到root用户修改-已知root密码&quot;&gt;&lt;a href=&quot;#1-直接切换到root用户修改-已知root密码&quot; class=&quot;headerlink&quot; title=&quot;1. 直接切换到root用户修改(已知root密码)&quot;&gt;&lt;/a&gt;1. 直接切换到root用户修改(已知root密码)&lt;/h4&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 切换到root用户&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;su&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 修改/etc/sudoers&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;vi /etc/sudoers&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;2-如果不知道root密码-可重启进入恢复模式修改-具体流程参照网络&quot;&gt;&lt;a href=&quot;#2-如果不知道root密码-可重启进入恢复模式修改-具体流程参照网络&quot; class=&quot;headerlink&quot; title=&quot;2. 如果不知道root密码, 可重启进入恢复模式修改, 具体流程参照网络&quot;&gt;&lt;/a&gt;2. 如果不知道root密码, 可重启进入恢复模式修改, 具体流程参照网络&lt;/h4&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://openpy.org/categories/Linux/"/>
+    
+      <category term="Ubuntu" scheme="https://openpy.org/categories/Linux/Ubuntu/"/>
+    
+    
+      <category term="sudoers" scheme="https://openpy.org/tags/sudoers/"/>
+    
+      <category term="sudo不能执行" scheme="https://openpy.org/tags/sudo%E4%B8%8D%E8%83%BD%E6%89%A7%E8%A1%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python防止对象无对应方法或变量报错</title>
+    <link href="https://openpy.org/posts/d7d50464.html"/>
+    <id>https://openpy.org/posts/d7d50464.html</id>
+    <published>2020-01-08T08:14:24.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>为了防止打印对象中不包含的属性时报错, 应先判断对象中是否有此属性, 有才执行相关代码<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># obj为对象名称, name为方法名称</span></span><br><span class="line"><span class="keyword">if</span> hasattr(obj, name):</span><br><span class="line">    print(<span class="string">"有这个属性"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"没有这个属性"</span>)</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;为了防止打印对象中不包含的属性时报错, 应先判断对象中是否有此属性, 有才执行相关代码&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1
+      
+    
+    </summary>
+    
+    
+      <category term="后端" scheme="https://openpy.org/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+      <category term="python" scheme="https://openpy.org/categories/%E5%90%8E%E7%AB%AF/python/"/>
+    
+    
+      <category term="hasattr" scheme="https://openpy.org/tags/hasattr/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>aws两个账号间服务器使用内网通信(VPC Peering)</title>
+    <link href="https://openpy.org/posts/7537ba3d.html"/>
+    <id>https://openpy.org/posts/7537ba3d.html</id>
+    <published>2019-12-31T09:52:14.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://openpy.org/categories/Linux/"/>
+    
+      <category term="云服务器" scheme="https://openpy.org/categories/Linux/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="VPC Peering" scheme="https://openpy.org/tags/VPC-Peering/"/>
+    
+      <category term="aws vpc" scheme="https://openpy.org/tags/aws-vpc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何向挂起到后端的程序键入命令</title>
+    <link href="https://openpy.org/posts/973a9f39.html"/>
+    <id>https://openpy.org/posts/973a9f39.html</id>
+    <published>2019-12-25T06:35:03.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-首先先看下测试代码-golang"><a href="#1-首先先看下测试代码-golang" class="headerlink" title="1. 首先先看下测试代码(golang)"></a>1. 首先先看下测试代码(golang)</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> cmd <span class="keyword">string</span></span><br><span class="line">        fmt.Print(<span class="string">"&gt;"</span>)</span><br><span class="line">        _, _ = fmt.Scanln(&amp;cmd)</span><br><span class="line">        <span class="keyword">if</span> cmd != <span class="string">""</span> &#123;</span><br><span class="line">fmt.Println(cmd)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a><h4 id="1-1-编译测试代码"><a href="#1-1-编译测试代码" class="headerlink" title="1.1 编译测试代码"></a>1.1 编译测试代码</h4><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build -o test main.go</span><br></pre></td></tr></table></figure><h3 id="2-程序放入后台方式"><a href="#2-程序放入后台方式" class="headerlink" title="2. 程序放入后台方式"></a>2. 程序放入后台方式</h3><h4 id="2-1-程序启动时为直接挂载到后台-如"><a href="#2-1-程序启动时为直接挂载到后台-如" class="headerlink" title="2.1 程序启动时为直接挂载到后台, 如:"></a>2.1 程序启动时为直接挂载到后台, 如:</h4><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./test &amp;</span><br></pre></td></tr></table></figure><p>以这种方式让程序在后台运行时, 如果程序需要从标准输入获取用户输入, 只需要将程序调到前台即可.<br>调到前台的方式为:</p><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 首先用<span class="built_in">jobs</span>查看程序挂起的序号</span></span><br><span class="line">jobs </span><br><span class="line">[1]  + suspended (tty input)  ./test</span><br></pre></td></tr></table></figure><p>通过jobs命令可以观察到该进程的挂起的序号为1, 这时候我们只需要输入以下命令即可将程序调到前台执行:</p><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1 为<span class="built_in">jobs</span>中命令中程序的序号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果想要程序再次后台执行可按Ctrl+z使程序后台执行</span></span><br><span class="line">fg %1</span><br></pre></td></tr></table></figure><p><img src="https://cdn.openpy.org/testjobs1.png" alt="testjobs1.png"></p><h4 id="2-2-程序是使用Supervisor等工具启动-无法将程序调到前台的"><a href="#2-2-程序是使用Supervisor等工具启动-无法将程序调到前台的" class="headerlink" title="2.2 程序是使用Supervisor等工具启动, 无法将程序调到前台的."></a>2.2 程序是使用Supervisor等工具启动, 无法将程序调到前台的.</h4><p>这种启动方式如果supervisor中配置的启动方式直接为 <strong>./test</strong> 的话, 目前博主没有找到程序可以直接接受标准输入的方式,但是找到一种替代方式, 将启动命令配置为如下方式</p><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(while [ 1 ]; do sleep 1; done) | ./test</span><br></pre></td></tr></table></figure><p>输入代码为:</p><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo "我是左侧的终端" &gt; /proc/$(pidof test)/fd/0</span><br></pre></td></tr></table></figure><p>首先先解释下为什么程序不加代码 <strong>(while [ 1 ]; do sleep 1; done)</strong>时为什么不可以.<br>这个命令为将echo的内容输出到程序执行的终端, 而不是进程, 但是第二种管道方式启动时, stdin为最初的管道, 所以才会起作用<br><img src="https://cdn.openpy.org/testjob2.png" alt="testjob2.png"></p><h3 id="3-参考文档"><a href="#3-参考文档" class="headerlink" title="3. 参考文档"></a>3. 参考文档</h3><p><a href="https://stackoverflow.com/questions/5374255/how-to-write-data-to-existing-processs-stdin-from-external-process" target="_blank" rel="noopener">stackoverflow</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-首先先看下测试代码-golang&quot;&gt;&lt;a href=&quot;#1-首先先看下测试代码-golang&quot; class=&quot;headerlink&quot; title=&quot;1. 首先先看下测试代码(golang)&quot;&gt;&lt;/a&gt;1. 首先先看下测试代码(golang)&lt;/h3&gt;&lt;figure class=&quot;highlight golang&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;package&lt;/span&gt; main&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; (&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;string&quot;&gt;&quot;fmt&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; cmd &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        fmt.Print(&lt;span class=&quot;string&quot;&gt;&quot;&amp;gt;&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        _, _ = fmt.Scanln(&amp;amp;cmd)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; cmd != &lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			fmt.Println(cmd)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://openpy.org/categories/Linux/"/>
+    
+    
+      <category term="linux标准输入" scheme="https://openpy.org/tags/linux%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>go-micro增加插件</title>
+    <link href="https://openpy.org/posts/8f4538c0.html"/>
+    <id>https://openpy.org/posts/8f4538c0.html</id>
+    <published>2019-12-23T10:59:44.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <content type="html"><![CDATA[<p>增加etcdv3<br>在$GOPATH/src/github.com/micro/micro下新建plugins.go</p><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    _ <span class="string">"github.com/micro/go-plugins/registry/etcdv3"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> go build -i -o micro ./main.go ./plugins.go</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mv micro <span class="variable">$GOBIN</span>/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> micro --registry=etcdv3 list services</span></span><br><span class="line">lp.srv.eg1</span><br><span class="line">lp.srv.eg2 </span><br><span class="line"><span class="meta">#</span><span class="bash">　报错trace包重复, 将报错路径下的trace包删除</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;增加etcdv3&lt;br&gt;在$GOPATH/src/github.com/micro/micro下新建plugins.go&lt;/p&gt;
+&lt;figure class=&quot;highlight golang&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;spa
+      
+    
+    </summary>
+    
+    
+      <category term="后端" scheme="https://openpy.org/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+      <category term="Golang" scheme="https://openpy.org/categories/%E5%90%8E%E7%AB%AF/Golang/"/>
+    
+    
+      <category term="go-micro" scheme="https://openpy.org/tags/go-micro/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu修改开机动画及紫色锁屏</title>
+    <link href="https://openpy.org/posts/ee4c5fa7.html"/>
+    <id>https://openpy.org/posts/ee4c5fa7.html</id>
+    <published>2019-12-20T02:58:27.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="1-Ubuntu修改开机动画"><a href="#1-Ubuntu修改开机动画" class="headerlink" title="1. Ubuntu修改开机动画"></a>1. Ubuntu修改开机动画</h4><h5 id="1-1-安装全套动画"><a href="#1-1-安装全套动画" class="headerlink" title="1.1 安装全套动画"></a>1.1 安装全套动画</h5><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install plymouth-theme*</span><br><span class="line">sudo update-alternatives --config default.plymouth # 输入编号选择一个。</span><br><span class="line">sudo update-initramfs -u</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure><a id="more"></a><p>此时开机动画已替换完成, ps:博主选的kubuntu or ubuntu-gnome-logo</p><h4 id="2-替换紫色锁屏"><a href="#2-替换紫色锁屏" class="headerlink" title="2. 替换紫色锁屏"></a>2. 替换紫色锁屏</h4><p>在设置中设置的锁屏壁纸貌似只在锁屏的状态下会显示, 当解锁输入密码时,还是那个紫色锁屏,更改方法如下</p><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/gnome-shell/theme</span><br><span class="line">sudo cp ubuntu.css ubuntu.css.bak #备份防止改错</span><br><span class="line">sudo vim ubuntu.css</span><br></pre></td></tr></table></figure><p>找到lockDialogGroup所在的位置，直接改就好了。</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#lockDialogGroup</span> &#123;</span><br><span class="line">   <span class="attribute">background</span>: <span class="number">#2c001e</span> <span class="built_in">url</span>(file:///boot/lock.jpg); <span class="comment">/* 路径为你选择的图片的路径*/</span></span><br><span class="line">   <span class="attribute">background-repeat</span>: no-repeat; <span class="comment">/*由repeat修改为no-repeat*/</span></span><br><span class="line">   <span class="comment">/*下面这两行是新增的*/</span></span><br><span class="line">   <span class="attribute">background-size</span>: cover;</span><br><span class="line">   <span class="attribute">background-position</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;1-Ubuntu修改开机动画&quot;&gt;&lt;a href=&quot;#1-Ubuntu修改开机动画&quot; class=&quot;headerlink&quot; title=&quot;1. Ubuntu修改开机动画&quot;&gt;&lt;/a&gt;1. Ubuntu修改开机动画&lt;/h4&gt;&lt;h5 id=&quot;1-1-安装全套动画&quot;&gt;&lt;a href=&quot;#1-1-安装全套动画&quot; class=&quot;headerlink&quot; title=&quot;1.1 安装全套动画&quot;&gt;&lt;/a&gt;1.1 安装全套动画&lt;/h5&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;figcaption&gt;&lt;span&gt;script&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo apt-get install plymouth-theme*&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo update-alternatives --config default.plymouth # 输入编号选择一个。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo update-initramfs -u&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo reboot&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://openpy.org/categories/Linux/"/>
+    
+      <category term="Ubuntu" scheme="https://openpy.org/categories/Linux/Ubuntu/"/>
+    
+    
+      <category term="ubuntu开机动画" scheme="https://openpy.org/tags/ubuntu%E5%BC%80%E6%9C%BA%E5%8A%A8%E7%94%BB/"/>
+    
+      <category term="紫色锁屏" scheme="https://openpy.org/tags/%E7%B4%AB%E8%89%B2%E9%94%81%E5%B1%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux磁盘挂载</title>
+    <link href="https://openpy.org/posts/f7800f43.html"/>
+    <id>https://openpy.org/posts/f7800f43.html</id>
+    <published>2019-12-17T12:12:03.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="1-查看linux下的硬盘挂载的空间-使用空间"><a href="#1-查看linux下的硬盘挂载的空间-使用空间" class="headerlink" title="1. 查看linux下的硬盘挂载的空间, 使用空间"></a>1. 查看linux下的硬盘挂载的空间, 使用空间</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;1-查看linux下的硬盘挂载的空间-使用空间&quot;&gt;&lt;a href=&quot;#1-查看linux下的硬盘挂载的空间-使用空间&quot; class=&quot;headerlink&quot; title=&quot;1. 查看linux下的硬盘挂载的空间, 使用空间&quot;&gt;&lt;/a&gt;1. 查看linux下的硬盘挂
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://openpy.org/categories/Linux/"/>
+    
+    
+      <category term="linux挂载磁盘" scheme="https://openpy.org/tags/linux%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98/"/>
+    
+      <category term="挂载磁盘" scheme="https://openpy.org/tags/%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu安装MySQL5.7时没有设置root密码解决方案</title>
+    <link href="https://openpy.org/posts/1121b615.html"/>
+    <id>https://openpy.org/posts/1121b615.html</id>
+    <published>2019-12-17T07:33:19.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo vim /etc/mysql/debian.cnf</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 找到password一行,复制密码</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysql -u debian-sys-maint -p 此长密码</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> use mysql;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> update user <span class="built_in">set</span> authentication_string=PASSWORD(<span class="string">"你的密码"</span>) <span class="built_in">where</span> user=<span class="string">'root'</span>;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> update user <span class="built_in">set</span> plugin=<span class="string">"mysql_native_password"</span>; <span class="comment"># 不用修改, 直接执行</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> quit;</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo service mysql restart</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这个时候就可以用刚刚设置的root密码登录mysql了</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://openpy.org/categories/Linux/"/>
+    
+      <category term="mysql" scheme="https://openpy.org/categories/Linux/mysql/"/>
+    
+    
+      <category term="mysql5.7" scheme="https://openpy.org/tags/mysql5-7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>添加当前用户到docker组,docker命令免sudo</title>
+    <link href="https://openpy.org/posts/8596c31f.html"/>
+    <id>https://openpy.org/posts/8596c31f.html</id>
+    <published>2019-12-17T07:28:22.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="添加当前用户到docker组"><a href="#添加当前用户到docker组" class="headerlink" title="添加当前用户到docker组"></a>添加当前用户到docker组</h4><p>如果想在当前用户输入docker命令时不输入docker,需要将当前用户添加到docker组当中</p><h4 id="1-查看docker组中用户列表"><a href="#1-查看docker组中用户列表" class="headerlink" title="1.查看docker组中用户列表"></a>1.查看docker组中用户列表</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cat /etc/group | grep docker</span><br></pre></td></tr></table></figure><p>最后一个 : 后面表示为docker组中的用户列表, 如果没有当前用户名, 则需要将当前用户加入docker组当中</p><h4 id="2-添加当前用户到docker组"><a href="#2-添加当前用户到docker组" class="headerlink" title="2. 添加当前用户到docker组"></a>2. 添加当前用户到docker组</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gpasswd -a $&#123;USER&#125; docker</span><br></pre></td></tr></table></figure><h4 id="3-重启docker服务"><a href="#3-重启docker服务" class="headerlink" title="3. 重启docker服务"></a>3. 重启docker服务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure><h4 id="4-如果提示socket文件权限不足-则给-sock-文件增加如下权限"><a href="#4-如果提示socket文件权限不足-则给-sock-文件增加如下权限" class="headerlink" title="4. 如果提示socket文件权限不足, 则给 .sock 文件增加如下权限"></a>4. 如果提示socket文件权限不足, 则给 .sock 文件增加如下权限</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod a+rw /var/run/docker.sock</span><br></pre></td></tr></table></figure><h4 id="5-重启docker服务"><a href="#5-重启docker服务" class="headerlink" title="5. 重启docker服务"></a>5. 重启docker服务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;添加当前用户到docker组&quot;&gt;&lt;a href=&quot;#添加当前用户到docker组&quot; class=&quot;headerlink&quot; title=&quot;添加当前用户到docker组&quot;&gt;&lt;/a&gt;添加当前用户到docker组&lt;/h4&gt;&lt;p&gt;如果想在当前用户输入docker命令时不输入
+      
+    
+    </summary>
+    
+    
+      <category term="docker" scheme="https://openpy.org/categories/docker/"/>
+    
+    
+      <category term="docker" scheme="https://openpy.org/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gnome安装搜狗后无法输入中文</title>
+    <link href="https://openpy.org/posts/undefined.html"/>
+    <id>https://openpy.org/posts/undefined.html</id>
+    <published>2019-12-17T07:21:03.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <content type="html"><![CDATA[<p>我用的是Gnome On Wayland 如果是这个桌面的话 是无法读取 ~/.xprofile 中的环境变量，所以请在/etc/environment中加入：</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GTK_IM_MODULE=fcitx</span><br><span class="line">QT_IM_MODULE=fcitx</span><br><span class="line">XMODIFIERS=@im=fcitx</span><br></pre></td></tr></table></figure><p>或者在登录时选择运行于Xorg的Gnome<br>参考文档地址: <a href="https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noopener">archlinux-fcitx</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我用的是Gnome On Wayland 如果是这个桌面的话 是无法读取 ~/.xprofile 中的环境变量，所以请在/etc/environment中加入：&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutt
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://openpy.org/categories/Linux/"/>
+    
+    
+      <category term="ubuntu" scheme="https://openpy.org/tags/ubuntu/"/>
+    
+      <category term="gnome" scheme="https://openpy.org/tags/gnome/"/>
+    
+      <category term="linux输入法" scheme="https://openpy.org/tags/linux%E8%BE%93%E5%85%A5%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nginx限流</title>
+    <link href="https://openpy.org/posts/c8db2ce0.html"/>
+    <id>https://openpy.org/posts/c8db2ce0.html</id>
+    <published>2019-12-16T11:22:58.000Z</published>
+    <updated>2020-03-17T10:35:06.211Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Nginx限流模块包含"><a href="#Nginx限流模块包含" class="headerlink" title="Nginx限流模块包含"></a>Nginx限流模块包含</h3><ul><li>连接数限流模块 <strong>ngx_http_limit_conn_module</strong></li><li>漏桶算法实现的请求限流模块 <strong>ngx_http_limit_req_module</strong><h3 id="ngx-http-limit-conn-module"><a href="#ngx-http-limit-conn-module" class="headerlink" title="ngx_http_limit_conn_module"></a><strong>ngx_http_limit_conn_module</strong></h3>我们经常会遇到这种情况，服务器流量异常，负载过大等等。对于大流量恶意的攻击访问，会带来带宽的浪费，服务器压力，影响业务，往往考虑对同一个ip的连接数，并发数进行限制。<br>ngx_http_limit_conn_module 模块来实现该需求。该模块可以根据定义的键来限制每个键值的连接数，如同一个IP来源的连接数。并不是所有的连接都会被该模块计数，只有那些正在被处理的请求（这些请求的头信息已被完全读入）所在的连接才会被计数。<br>我们可以在nginx_conf的http{}中加上如下配置实现限制：<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 限制每个用户的并发连接数，取名one</span></span><br><span class="line"><span class="attribute">limit_conn_zone</span> <span class="variable">$binary_remote_addr</span> zone=one:<span class="number">10m</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置记录被限流后的日志级别，默认error级别</span></span><br><span class="line"><span class="attribute">limit_conn_log_level</span> <span class="literal">error</span>;</span><br><span class="line"><span class="comment"># 配置被限流后返回的状态码，默认返回503</span></span><br><span class="line"><span class="attribute">limit_conn_status</span> <span class="number">503</span>;</span><br></pre></td></tr></table></figure>然后在server{}里加上如下代码：<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#限制用户并发连接数为1</span></span><br><span class="line"><span class="attribute">limit_conn</span> one <span class="number">1</span>;</span><br></pre></td></tr></table></figure>另外刚才是配置针对单个IP的并发限制，还是可以针对域名进行并发限制，配置和客户端IP类似。<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#http&#123;&#125;段配置</span></span><br><span class="line"><span class="attribute">limit_conn_zone</span> $ server_name zone=perserver:<span class="number">10m</span>;</span><br><span class="line"><span class="comment">#server&#123;&#125;段配置</span></span><br><span class="line"><span class="attribute">limit_conn</span> perserver <span class="number">1</span>;</span><br></pre></td></tr></table></figure><h3 id="ngx-http-limit-req-module"><a href="#ngx-http-limit-req-module" class="headerlink" title="ngx_http_limit_req_module"></a><strong>ngx_http_limit_req_module</strong></h3>上面我们使用到了ngx_http_limit_conn_module 模块，来限制连接数。那么请求数的限制该怎么做呢？这就需要通过ngx_http_limit_req_module 模块来实现，该模块可以通过定义的键值来限制请求处理的频率。<br>特别的，可以限制来自单个IP地址的请求处理频率。限制的方法是使用了漏斗算法，每秒固定处理请求数，推迟过多请求。如果请求的频率超过了限制域配置的值，请求处理会被延迟或被丢弃，所以所有的请求都是以定义的频率被处理的。<br>在http{}中配置<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#区域名称为one，大小为10m，平均处理的请求频率不能超过每秒一次。</span></span><br><span class="line"><span class="attribute">limit_req_zone</span> <span class="variable">$binary_remote_addr</span> zone=one:<span class="number">10m</span> rate=1r/s;</span><br></pre></td></tr></table></figure>在server{}中配置<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置每个IP桶的数量为5</span></span><br><span class="line"><span class="attribute">limit_req</span> zone=one burst=<span class="number">5</span>;</span><br></pre></td></tr></table></figure>上面设置定义了每个IP的请求处理只能限制在每秒1个。并且服务端可以为每个IP缓存5个请求，如果操作了5个请求，请求就会被丢弃。<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><a href="https://colobu.com/2015/10/26/nginx-limit-modules/" target="_blank" rel="noopener">https://colobu.com/2015/10/26/nginx-limit-modules/</a><br><a href="[https://mp.weixin.qq.com/s?__biz=MzU0MzQ5MDA0Mw==&mid=2247488251&idx=1&sn=0ea27c9b8d3a0b1656137162ccf39d80&chksm=fb0bf86fcc7c71790c67a58efb1f8114abaeb099bf1e453a33b5d1905c8ee6e7b27eb57fd61a&mpshare=1&scene=1&srcid=&sharer_sharetime=1576477648655&sharer_shareid=714f27d4f289ce96efe7800acadcd2d8#rd](https://mp.weixin.qq.com/s?__biz=MzU0MzQ5MDA0Mw==&mid=2247488251&idx=1&sn=0ea27c9b8d3a0b1656137162ccf39d80&chksm=fb0bf86fcc7c71790c67a58efb1f8114abaeb099bf1e453a33b5d1905c8ee6e7b27eb57fd61a&mpshare=1&scene=1&srcid=&sharer_sharetime=1576477648655&sharer_shareid=714f27d4f289ce96efe7800acadcd2d8#rd)">朱小厮的博客</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Nginx限流模块包含&quot;&gt;&lt;a href=&quot;#Nginx限流模块包含&quot; class=&quot;headerlink&quot; title=&quot;Nginx限流模块包含&quot;&gt;&lt;/a&gt;Nginx限流模块包含&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;连接数限流模块 &lt;strong&gt;ngx_http_lim
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://openpy.org/categories/Linux/"/>
+    
+      <category term="nginx" scheme="https://openpy.org/categories/Linux/nginx/"/>
+    
+    
+      <category term="nginx限流" scheme="https://openpy.org/tags/nginx%E9%99%90%E6%B5%81/"/>
+    
+      <category term="nginx" scheme="https://openpy.org/tags/nginx/"/>
+    
+  </entry>
+  
+</feed>

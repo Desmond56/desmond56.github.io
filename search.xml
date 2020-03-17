@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>以太坊为什么要把evm换成ewasm</title>
+      <link href="/posts/634bfd05.html"/>
+      <url>/posts/634bfd05.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> tag1 </category>
+          
+          <category> tag2 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> tag1 </tag>
+            
+            <tag> tag2 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux上v2ray/ss做全局代理</title>
       <link href="/posts/d5182360.html"/>
       <url>/posts/d5182360.html</url>
@@ -228,7 +257,7 @@
       <link href="/posts/f7800f43.html"/>
       <url>/posts/f7800f43.html</url>
       
-        <content type="html"><![CDATA[<h4 id="1-查看linux下的硬盘挂载的空间-使用空间"><a href="#1-查看linux下的硬盘挂载的空间-使用空间" class="headerlink" title="1. 查看linux下的硬盘挂载的空间, 使用空间"></a>1. 查看linux下的硬盘挂载的空间, 使用空间</h4><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h4 id="1-查看linux下的硬盘挂载的空间-使用空间"><a href="#1-查看linux下的硬盘挂载的空间-使用空间" class="headerlink" title="1. 查看linux下的硬盘挂载的空间, 使用空间"></a>1. 查看linux下的硬盘挂载的空间, 使用空间</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
