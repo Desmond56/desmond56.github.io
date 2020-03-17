@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://openpy.org/posts/275f2d5d.html</loc>
-    <lastmod>2020-03-17</lastmod>
-  </url>  <url>
     <loc>https://openpy.org/posts/973a9f39.html</loc>
     <lastmod>2020-03-17</lastmod>
   </url>  <url>
@@ -38,6 +35,9 @@
     <lastmod>2020-03-17</lastmod>
   </url>  <url>
     <loc>https://openpy.org/posts/d7d50464.html</loc>
+    <lastmod>2020-03-17</lastmod>
+  </url>  <url>
+    <loc>https://openpy.org/posts/275f2d5d.html</loc>
     <lastmod>2020-03-17</lastmod>
   </url>
 </urlset>
