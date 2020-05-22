@@ -1,220 +1,535 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <meta name="renderer" content="webkit">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-155720019-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
 
-  
-  <title>标签: sudoers | Alex&#39;s Blog</title>
 
-  <link rel="shortcut icon" href="/images/favicon.png">
-  <link rel="alternate" href="/atom.xml" title="Alex's Blog">
-  <meta property="og:type" content="website">
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Tags: sudoers | Alex&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#071921">
+    
+    
+    <meta name="keywords" content="">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="Alex&#39;s Blog">
 <meta property="og:url" content="https://openpy.org/tags/sudoers/index.html">
 <meta property="og:site_name" content="Alex&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Alex">
 <meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="Alex&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <link rel="stylesheet" href="/css/prism/prism-atom-dark.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
 
-  <meta name="format-detection" content="telephone=no,email=no">
-  <meta name="theme-color" content="#9C27B0">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Alex&#39;s Blog">
-  <meta name="msapplication-starturl" content="https://openpy.org/tags/sudoers/">
-  <meta name="msapplication-navbutton-color" content="#9C27B0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Alex&#39;s Blog">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="apple-touch-icon" href="/images/favicon.png">
-
-  
-
-  
-    <link rel="canonical" href="https://openpy.org/tags/sudoers/index.html">
-  
-
-  
-  
-
-  
-  
-  
-
-  
-<link rel="stylesheet" href="/css/mdui.css">
-<link rel="stylesheet" href="/css/style.css">
-
-  
-<link rel="stylesheet" href="/custom.css">
+    <!-- custom head -->
+    
 
 <meta name="generator" content="Hexo 4.2.0"></head>
-<body class="mdui-appbar-with-toolbar mdui-drawer-body-left mdui-theme-primary-indigo mdui-theme-accent-pink">
-  <script>var a=localStorage.getItem("mdui-theme-layout-dark");if(a){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
-  <header id="header" class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset">
-  <div class="mdui-toolbar mdui-color-theme">
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="mdui-icon material-icons">menu</i></a>
-    <a href="/" class="mdui-typo-headline">Alex&#39;s Blog</a>
-    <div class="mdui-toolbar-spacer"></div>
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
-    <a href="/atom.xml" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'RSS'}"><i class="mdui-icon material-icons">rss_feed</i></a>
-  </div>
-</header>
-<div class="mdui-dialog" id="search">
-  
-    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="请输入关键字"><input type="hidden" name="sitesearch" value="https://openpy.org"></form>
-    <div class="search-result"></div>
-  
-</div>
-  <aside id="sidebar" class="mdui-drawer mdui-drawer-full-height">
-  <div class="mdui-grid-tile">
-    <img src="/images/banner.png" style="height: 160px;">
-    <img src="https://cdn.openpy.org/avatar.png" class="avatar-animation" style="position: absolute; top: 10%; left: 24px; width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;">
-    <div class="mdui-grid-tile-actions">
-      <div class="mdui-grid-tile-text">
-        <div class="mdui-grid-tile-title">Alex</div>
-        <div class="mdui-grid-tile-subtitle"><i class="mdui-icon material-icons">art_track</i></div>
-      </div>
-      
-    </div>
-  </div>
 
-  <div class="mdui-list" mdui-collapse="{accordion: true}">
-    <a href="/" class="mdui-list-item mdui-ripple">
-      <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
-      <div class="mdui-list-item-content">主页</div>
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-list-ul"></i>
     </a>
-    <div class="mdui-collapse-item">
-      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-deep-orange">inbox</i>
-        <div class="mdui-list-item-content">归档</div>
-        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
-        
-        <a class="mdui-ripple sidebar_archives-link" href="/archives/2020/03/">三月 2020<span class="mdui-ripple sidebar_archives-count">3</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2020/01/">一月 2020<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2019/12/">十二月 2019<span class="mdui-ripple sidebar_archives-count">9</span></a>
-        
-      </div>
-    </div>
-    <div class="mdui-collapse-item">
-      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-green">chrome_reader_mode</i>
-        <div class="mdui-list-item-content">分类</div>
-        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
-        
-        <a class="mdui-ripple sidebar_archives-link" href="/categories/Linux/">Linux<span class="mdui-ripple sidebar_archives-count">9</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/Linux/Ubuntu/">Ubuntu<span class="mdui-ripple sidebar_archives-count">2</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/Linux/mysql/">mysql<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/Linux/nginx/">nginx<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/Linux/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/docker/">docker<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/tag1/">tag1<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/tag1/tag2/">tag2<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端<span class="mdui-ripple sidebar_archives-count">2</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/%E5%90%8E%E7%AB%AF/Golang/">Golang<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/%E5%90%8E%E7%AB%AF/python/">python<span class="mdui-ripple sidebar_archives-count">1</span></a>
-        
+    <div class="brand-wrap" style="background-image:url(/img/back_blue.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://cdn.openpy.org/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alex</h5>
+          <a href="mailto:alex@openpy.org" title="alex@openpy.org" class="mail">alex@openpy.org</a>
+        </hgroup>
       </div>
     </div>
-    <div class="mdui-collapse-item">
-      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-brown">bookmark</i>
-        <div class="mdui-list-item-content">标签</div>
-        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-        <a class="mdui-ripple sidebar_archives-link" href="/tags/VPC-Peering/" rel="tag">VPC Peering<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/aws-vpc/" rel="tag">aws vpc<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/docker/" rel="tag">docker<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/gnome/" rel="tag">gnome<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/go-micro/" rel="tag">go-micro<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/hasattr/" rel="tag">hasattr<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/linux%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98/" rel="tag">linux挂载磁盘<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/linux%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5/" rel="tag">linux标准输入<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/linux%E8%BE%93%E5%85%A5%E6%B3%95/" rel="tag">linux输入法<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/mysql5-7/" rel="tag">mysql5.7<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/nginx/" rel="tag">nginx<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/nginx%E9%99%90%E6%B5%81/" rel="tag">nginx限流<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/shadowsocks/" rel="tag">shadowsocks<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/sudoers/" rel="tag">sudoers<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/sudo%E4%B8%8D%E8%83%BD%E6%89%A7%E8%A1%8C/" rel="tag">sudo不能执行<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/tag1/" rel="tag">tag1<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/tag2/" rel="tag">tag2<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/ubuntu/" rel="tag">ubuntu<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/ubuntu%E5%BC%80%E6%9C%BA%E5%8A%A8%E7%94%BB/" rel="tag">ubuntu开机动画<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/v2ray/" rel="tag">v2ray<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86/" rel="tag">全局代理<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98/" rel="tag">挂载磁盘<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/%E7%B4%AB%E8%89%B2%E9%94%81%E5%B1%8F/" rel="tag">紫色锁屏<span class="mdui-ripple sidebar_archives-count">1</span></a>
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
         
-      </div>
-    </div>
-    <a href="/about" class="mdui-list-item mdui-ripple">
-      <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple">person</i>
-      <div class="mdui-list-item-content">关于</div>
-    </a>
-  </div>
-
-  <div class="mdui-divider"></div>
-
-  <div class="mdui-list" mdui-collapse="{accordion: true}">
-    
-      <a href="/tagcloud" class="mdui-list-item mdui-ripple">标签云</a>
-    
-      <a href="/gallery" class="mdui-list-item mdui-ripple">画廊</a>
-    
-    <div class="mdui-collapse-item">
-      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <div class="mdui-list-item-content">友情链接</div>
-        <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
-      </div>
-      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
         
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
         
-          <a href="javascript:;" class="mdui-list-item mdui-ripple mdui-p-l-2 mdui-text-color-theme" style="justify-content: center;">链接为空</a>
+            <li class="waves-block waves-effect active">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
         
-      </div>
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Desmond56" target="_blank" rel="noopener"  >
+                <i class="icon icon-lg icon-github"></i>
+                代码
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books/"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/movies/"  >
+                <i class="icon icon-lg icon-film"></i>
+                影视
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/games/"  >
+                <i class="icon icon-lg icon-gamepad"></i>
+                游戏
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about/"  >
+                <i class="icon icon-lg icon-info-circle"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
     </div>
   </div>
 </aside>
-  <main id="main" class="mdui-m-t-5 fadeIn animated">
 
-  <article class="mdui-card mdui-m-b-5 mdui-hoverable">
-    <a href="/posts/275f2d5d.html">
-      <header class="mdui-card-media mdui-ripple">
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Tags: sudoers</div>
         
-        <img src="/images/random/material-15.png" style="max-height: 240px;">
-        <div class="mdui-card-media-covered">
-          <div class="mdui-card-primary">
-            <div class="mdui-card-primary-title">sudoers语法错误</div>
-            <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2020-03-09 / <i class="iconfont">&#xe601;</i> Alex</div>
-          </div>
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
         </div>
-      </header>
-    </a>
-    <div class="mdui-card-content mdui-typo">
-      
         
-      
-      <a href="/posts/275f2d5d.html">阅读更多 >></a>
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
     </div>
-    <footer class="mdui-card-actions">
+</header>
+<header class="content-header tags-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Tags: sudoers</h1>
+        <h5 class="subtitle">
+            
+                
+                    共计
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            1
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                     
+                    篇文章，继续努力
+                
+            
+        </h5>
+    </div>
+
+    
+<div class="tabs-bar container">
+    <nav class="tags-list">
+        <a href="/tags" style="-webkit-order:-1;order:-1" class="tags-list-item waves-effect waves-button waves-light
+            ">全部</a>
+        
+
+            <a href="/tags/aws-vpc/" style="-webkit-order:11;order:11" class="tags-list-item waves-effect waves-button waves-light">aws vpc</a>
+
+        
+
+            <a href="/tags/docker/" style="-webkit-order:12;order:12" class="tags-list-item waves-effect waves-button waves-light">docker</a>
+
+        
+
+            <a href="/tags/evm/" style="-webkit-order:13;order:13" class="tags-list-item waves-effect waves-button waves-light">evm</a>
+
+        
+
+            <a href="/tags/ewasam/" style="-webkit-order:14;order:14" class="tags-list-item waves-effect waves-button waves-light">ewasam</a>
+
+        
+
+            <a href="/tags/gnome/" style="-webkit-order:15;order:15" class="tags-list-item waves-effect waves-button waves-light">gnome</a>
+
+        
+
+            <a href="/tags/go-micro/" style="-webkit-order:16;order:16" class="tags-list-item waves-effect waves-button waves-light">go-micro</a>
+
+        
+
+            <a href="/tags/hasattr/" style="-webkit-order:17;order:17" class="tags-list-item waves-effect waves-button waves-light">hasattr</a>
+
+        
+
+            <a href="/tags/linux%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98/" style="-webkit-order:18;order:18" class="tags-list-item waves-effect waves-button waves-light">linux挂载磁盘</a>
+
+        
+
+            <a href="/tags/linux%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5/" style="-webkit-order:19;order:19" class="tags-list-item waves-effect waves-button waves-light">linux标准输入</a>
+
+        
+
+            <a href="/tags/linux%E8%BE%93%E5%85%A5%E6%B3%95/" style="-webkit-order:20;order:20" class="tags-list-item waves-effect waves-button waves-light">linux输入法</a>
+
+        
+
+            <a href="/tags/mysql5-7/" style="-webkit-order:21;order:21" class="tags-list-item waves-effect waves-button waves-light">mysql5.7</a>
+
+        
+
+            <a href="/tags/nginx/" style="-webkit-order:22;order:22" class="tags-list-item waves-effect waves-button waves-light">nginx</a>
+
+        
+
+            <a href="/tags/nginx%E9%99%90%E6%B5%81/" style="-webkit-order:23;order:23" class="tags-list-item waves-effect waves-button waves-light">nginx限流</a>
+
+        
+
+            <a href="/tags/shadowsocks/" style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">shadowsocks</a>
+
+        
+
+            <a href="/tags/sudoers/" style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light active">sudoers</a>
+
+        
+
+            <a href="/tags/sudo%E4%B8%8D%E8%83%BD%E6%89%A7%E8%A1%8C/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">sudo不能执行</a>
+
+        
+
+            <a href="/tags/ubuntu/" style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">ubuntu</a>
+
+        
+
+            <a href="/tags/ubuntu%E5%BC%80%E6%9C%BA%E5%8A%A8%E7%94%BB/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">ubuntu开机动画</a>
+
+        
+
+            <a href="/tags/v2ray/" style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">v2ray</a>
+
+        
+
+            <a href="/tags/VPC-Peering/" style="-webkit-order:6;order:6" class="tags-list-item waves-effect waves-button waves-light">VPC Peering</a>
+
+        
+
+            <a href="/tags/%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86/" style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">全局代理</a>
+
+        
+
+            <a href="/tags/%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98/" style="-webkit-order:8;order:8" class="tags-list-item waves-effect waves-button waves-light">挂载磁盘</a>
+
+        
+
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="-webkit-order:9;order:9" class="tags-list-item waves-effect waves-button waves-light">数据结构</a>
+
+        
+
+            <a href="/tags/%E7%B4%AB%E8%89%B2%E9%94%81%E5%B1%8F/" style="-webkit-order:10;order:10" class="tags-list-item waves-effect waves-button waves-light">紫色锁屏</a>
+
+        
+    </nav>
+    <!-- PC show more-->
+    <div class="tags-list-more">
+        <a href="javascript:;" onclick="BLOG.tabBar(this)" class="action tags-list-item waves-effect waves-circle waves-light"><i class="icon icon-ellipsis-h"></i></a>
+    </div>
+</div>
+
+
+
+</header>
+
+<div class="container body-wrap fade">
+    
+            <div class="waterfall">
+          
+
+            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2020-03-09 14:53:14" datetime="2020-03-09T06:53:14.000Z"  itemprop="datePublished">2020-03-09</time>
+
       
-        <a class="mdui-ripple article_categories-link" href="/categories/Linux/">Linux</a><a class="mdui-ripple article_categories-link" href="/categories/Linux/Ubuntu/">Ubuntu</a>
-      
-      
-        <a class="mdui-ripple article_tags-link" href="/tags/sudoers/" rel="tag">sudoers</a><a class="mdui-ripple article_tags-link" href="/tags/sudo%E4%B8%8D%E8%83%BD%E6%89%A7%E8%A1%8C/" rel="tag">sudo不能执行</a>
-      
-    </footer>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/Ubuntu/">Ubuntu</a></li></ul></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/posts/275f2d5d.html">sudoers语法错误</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sudoers/" rel="tag">sudoers</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sudo%E4%B8%8D%E8%83%BD%E6%89%A7%E8%A1%8C/" rel="tag">sudo不能执行</a></li></ul>
+
+    </div>
+    
   </article>
+</div>
 
-</main>
-  <footer id="footer" class="mdui-m-t-5 mdui-p-y-3 mdui-color-theme">
-  <div class="mdui-p-y-0 mdui-text-center">
+        
+            </div>
+        
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  </div>
-  <div class="mdui-p-y-1 mdui-text-center">
-    Copyright &copy; 2020 Alex<br>
-    Powered by <a href="https://hexo.io/" target="_blank" class="mdui-text-color-theme-accent">Hexo</a>
-    
-  </div>
+</div>
+
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span>
+                        <a href="/atom.xml" target="_blank" class="rss" title="rss">
+                            <i class="icon icon-lg icon-rss"></i>
+                        </a>
+                    </span>
+                    
+                        <span>
+                            博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a>
+                        </span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                Alex &copy;
+                    
+                        2018 -
+                            
+                                2020
+            </span>
+            <span>
+                
+                    <a href="http://beian.miit.gov.cn/" target="_blank">
+                        京ICP备16013354号
+                    </a>
+                    <br>
+                    
+                        Power by
+                        <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+                        <a href="https://github.com/abelsu7/hexo-theme-indigo-plus" target="_blank">indigo plus</a>
+                        <p>Hosted by <a href="https://pages.github.com" target="_blank" style="font-weight: bold">Github Pages</a></p>
+            </span>
+        </p>
+    </div>
 </footer>
-  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">arrow_upward</i></button>
-  
-  
-<script src="/js/mdui.js"></script>
-<script src="/js/script.js"></script>
 
-  
-<script src="/custom.js"></script>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gobottom" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-comments"></span></a>
 
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://openpy.org/tags/sudoers/&title=Alex's Blog&pic=https://cdn.openpy.org/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://openpy.org/tags/sudoers/&title=Alex's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://openpy.org/tags/sudoers/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Alex's Blog&url=https://openpy.org/tags/sudoers/&via=https://openpy.org" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://openpy.org/tags/sudoers/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABxUlEQVR42u3awa6DMAwEwP7/T/Oulfoa1jEJVBpOlQphuFjxOq9XfB1v17d/x0993vPtqQsuXFzcNvcYXsk9+Ys/18wNuLi4+7n50h1EdX1cXNzf4n4rduOVx4USFxf317njstXZ7uDi4j6HmzQ/cw1MUviW9Gq4uLgNbj/O6P9eku/i4uJOcY/ilQ9aqmFr9HZcXNwt3Lyg5FuWcTxa3b7g4uLexU1ijs4gpHr8ovBJuLi4i7n5UKTTwMwd7DhJeXFxcS/lViPLuWh1riD+8xsXF/cmbvVoRZUy9zG4uLh3cavtUH784rLmBxcXdzu3ylox/TxplnBxcbdzq5uScdHpF7iT5gcXF3cZd26MMTdGzaOT8pAVFxd3MTdfrnN4YvxseVSDi4u7gJuDOq+vlraTc2S4uLgbuflmJd8AXRvL4uLi7uSOl8jj0TxSSeivKgsXF7fN7Y9Aqk/lgQguLu5d3LlhZz5QGZenZBs0+TG4uLhtbr5lmYsz8tFLuVfDxcVdzM1HGnMD0U7zg4uL+3xu/7BFJ1rFxcV9JrcaguQhSyTExcXdyO0HH3mZqwYluLi4+7nVUtIZulTbp1a+i4uLO8P9A4jckJ+8ntnTAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/node-waves@0.7.6/src/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/prism.min.js?v=1.7.2"></script>
+<script src="/js/prism-vim.min.js?v=1.7.2"></script>
 </body>
 </html>
