@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://openpy.org/"/>
-  <updated>2020-03-17T10:47:46.719Z</updated>
+  <updated>2020-05-22T10:20:54.475Z</updated>
   <id>https://openpy.org/</id>
   
   <author>
@@ -17,13 +17,50 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>以太坊为什么要把evm换成ewasm</title>
+    <title>docker安装mysql8.0</title>
+    <link href="https://openpy.org/posts/1493d95.html"/>
+    <id>https://openpy.org/posts/1493d95.html</id>
+    <published>2020-05-22T10:06:38.000Z</published>
+    <updated>2020-05-22T10:20:54.475Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><p>先查看<a href="https://hub.docker.com/_/mysql?tab=description" target="_blank" rel="noopener">docker-mysql版本</a></p></li><li><p>拉docker镜像到本地</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull mysql:8.0.20</span><br></pre></td></tr></table></figure></li><li><p>宿主机创建配置文件夹</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /opt/docker-mysql/conf.d</span><br></pre></td></tr></table></figure></li><li><p>在创建的文件夹下添加 my.cnf 配置文件, 文件名结尾必须为.cnf, 以下为示例内容</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"><span class="comment"># 表名不区分大小写</span></span><br><span class="line">lower_case_table_names=1 </span><br><span class="line"><span class="comment">#server-id=1</span></span><br><span class="line">datadir=/var/lib/mysql</span><br><span class="line"><span class="comment">#socket=/var/lib/mysql/mysqlx.sock</span></span><br><span class="line"><span class="comment">#symbolic-links=0</span></span><br><span class="line"><span class="comment"># sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES </span></span><br><span class="line">[mysqld_safe]</span><br><span class="line">log-error=/var/log/mysqld.log</span><br><span class="line">pid-file=/var/run/mysqld/mysqld.pid</span><br></pre></td></tr></table></figure></li><li><p>创建数据存储文件夹</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /opt/docker-mysql/data</span><br></pre></td></tr></table></figure></li><li><p>运行mysql容器(xxxxxxxx为设置的root密码)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql \</span><br><span class="line">    --restart=always \</span><br><span class="line">    -p 3306:3306 \</span><br><span class="line">    -v /opt/docker-mysql/conf.d:/etc/mysql/conf.d \</span><br><span class="line">    -v /opt/docker-mysql/data:/var/lib/mysql \</span><br><span class="line">    -e MYSQL_ROOT_PASSWORD=xxxxxxxx \</span><br><span class="line">    -d mysql:8.0.20</span><br></pre></td></tr></table></figure></li><li><p>常用命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入mysql容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it mysql bash</span><br><span class="line"><span class="comment"># 备份数据</span></span><br><span class="line">docker <span class="built_in">exec</span> mysql sh -c <span class="string">'exec mysqldump --all-databases -uroot -p"123456-abc"'</span> &gt; /some/path/on/your/host/all-databases.sql</span><br><span class="line"><span class="comment"># 恢复数据</span></span><br><span class="line">docker <span class="built_in">exec</span> -i mysql sh -c <span class="string">'exec mysql -uroot -p"123456-abc"'</span> &lt; /some/path/on/your/host/all-databases.sql</span><br><span class="line"><span class="comment"># 创建访问用户</span></span><br><span class="line">create user <span class="string">'node'</span>@<span class="string">'172.17.0.1'</span> identified by <span class="string">'Asdfzxcv1234'</span>;</span><br><span class="line"><span class="comment"># 设置新用户访问权限</span></span><br><span class="line">GRANT ALL ON *.* TO <span class="string">'root'</span>@<span class="string">'172.17.0.1'</span>;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;先查看&lt;a href=&quot;https://hub.docker.com/_/mysql?tab=description&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;docker-mysql版本&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;拉
+      
+    
+    </summary>
+    
+    
+      <category term="mysql" scheme="https://openpy.org/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="https://openpy.org/tags/mysql/"/>
+    
+      <category term="docker" scheme="https://openpy.org/tags/docker/"/>
+    
+      <category term="mysql8.0" scheme="https://openpy.org/tags/mysql8-0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>以太坊为什么要把evm换成WebAssembly</title>
     <link href="https://openpy.org/posts/634bfd05.html"/>
     <id>https://openpy.org/posts/634bfd05.html</id>
     <published>2020-03-17T08:35:32.000Z</published>
-    <updated>2020-03-17T10:47:46.719Z</updated>
+    <updated>2020-04-16T07:51:05.170Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Evm简介"><a href="#Evm简介" class="headerlink" title="Evm简介"></a>Evm简介</h2><p>EVM 由基于堆栈的架构组成。为了部署智能合约，必须首先将所有高级以太坊智能合约代码编译为机器可读代码（称为字节码）。然后，EVM 通过后进先出堆栈安排来处理此字节码代码（一系列单字节操作码和可选参数）。此操作类似于 Java 虚拟机（JVM），其中每条指令都以单字节操作码和参数开始，如果有参数的话，则占用后面的未对齐的字节，值按大端排序给出。</p><a id="more"></a><h2 id="WebAssemble-简称Wasm"><a href="#WebAssemble-简称Wasm" class="headerlink" title="WebAssemble(简称Wasm)"></a>WebAssemble(简称Wasm)</h2><p>WebAssembly(Wasm)是一种可以在现代 Web 浏览器中运行新型代码。它带来了新功能并在性能上有重大进展。Wasm 旨在成为 C，C++和 Rust 等低级源语言的有效编译目标。</p><h2 id="以太坊WebAssmble-简称Ewasm"><a href="#以太坊WebAssmble-简称Ewasm" class="headerlink" title="以太坊WebAssmble(简称Ewasm)"></a>以太坊WebAssmble(简称Ewasm)</h2><p>以太坊 Web Assembly （Ewasm）是基于现代标准 WebAssembly 虚拟机构建的确定性智能合约执行引擎。Ewasm 是替代EVM 的主要候选方案，是Ethereum 2.0 “Serenity”路线图的一部分。甚至，还有人建议在以太坊主网上采用 Ewasm。</p><h2 id="为什么选择Ewasm"><a href="#为什么选择Ewasm" class="headerlink" title="为什么选择Ewasm"></a>为什么选择Ewasm</h2><p>以太坊需要性能更好的虚拟机, wasm有着接近原声的运行速度,而且wasm有着谷歌微软等公司推进, 并且拥有成熟的社区。<br>EVM 的当前架构是释放其原始（raw）性能的最大障碍之一（GitHub EIP48，2019）。例如，虽然 256 位字长可促进本机哈希和椭圆曲线运算（Antonopoulos and Wood，2018），但也使从 EVM 操作码转换成硬件指令的过程难度过大，远超所需。提供更接近硬件映射的架构将大大提高以太坊的性能（GitHub EIP48，2019）。<br>除了性能增强方面，Ewasm 项目的设计目标之一是还支持跨多种语言和工具进行智能合约开发，即把 LLVM，C，C++，Rust，JavaScript 纳入开发周期。<br>从理论上讲，可以编译为 Wasm 的任何语言都可以用来编写智能合约。只要实现 Ewasm 合约接口（ECI）和以太坊环境接口（EEI）（ewasm，2019）。</p>]]></content>
     
     <summary type="html">
+    
+      &lt;h2 id=&quot;Evm简介&quot;&gt;&lt;a href=&quot;#Evm简介&quot; class=&quot;headerlink&quot; title=&quot;Evm简介&quot;&gt;&lt;/a&gt;Evm简介&lt;/h2&gt;&lt;p&gt;EVM 由基于堆栈的架构组成。为了部署智能合约，必须首先将所有高级以太坊智能合约代码编译为机器可读代码（称为字节码）。然后，EVM 通过后进先出堆栈安排来处理此字节码代码（一系列单字节操作码和可选参数）。此操作类似于 Java 虚拟机（JVM），其中每条指令都以单字节操作码和参数开始，如果有参数的话，则占用后面的未对齐的字节，值按大端排序给出。&lt;/p&gt;
     
     </summary>
     
